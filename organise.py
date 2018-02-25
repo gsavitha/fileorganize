@@ -6,7 +6,9 @@ ext={}
 byteconv=1024.0*1024
 #Uncomment the below line and comment the above line if you believe 1MB=1000B, you heathen.
 #byteconv=1000.0*1000.0
-for dpath, dnames, fnames in os.walk('/home/savitha/Desktop'):
+if os
+path=os.path.expanduser()
+for dpath, dnames, fnames in os.walk('/home/savitha/Desktop',topdown=False):
     for file in fnames:
             fn=os.path.join(dpath, file)
             try:
@@ -17,6 +19,12 @@ for dpath, dnames, fnames in os.walk('/home/savitha/Desktop'):
                 ext[e].append([dpath,file])
             except:
                 continue
+    for dirs in dnames:
+        print(os.path.join(dpath,dirs))
+        try:
+            os.removedirs(os.path.join(dpath,dirs))
+        except:
+            continue
 i=0
 for x in sorted(files, key=files.get, reverse=True):
     i+=1
