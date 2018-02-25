@@ -1,16 +1,15 @@
 import os
 import json
 files={}
-
 ext={}
 byteconv=1024.0*1024
 #Uncomment the below line and comment the above line if you believe 1MB=1000B, you heathen.
 #byteconv=1000.0*1000.0
-for dpath, dnames, fnames in os.walk(os.path.join(os.path.expanduser("~"),"Desktop")):
+for dpath, dnames, fnames in os.walk(os.path.expanduser("~")):
+    ##Excluding hidden files
     dnames[:] = [d for d in dnames if not d.startswith('.')]
     for file in fnames:
             fn=os.path.join(dpath, file)
-            print(fn)
             try:
                 files[fn]=os.path.getsize(fn)
             except:
@@ -18,7 +17,6 @@ for dpath, dnames, fnames in os.walk(os.path.join(os.path.expanduser("~"),"Deskt
 for dpath, dnames, fnames in os.walk(os.path.join(os.path.expanduser("~"),"Desktop")):
     for file in fnames:
             fn=os.path.join(dpath, file)
-            print(fn)
             try:
                 e=os.path.splitext(fn)[1]
                 if e not in ext:
@@ -36,16 +34,13 @@ for e in ext:
     ##Ignoring All Shortcuts.
     if e==".lnk":
         continue
-    print(e)
     dir=os.path.join(os.path.expanduser("~/Documents"),e.replace(".","").upper())
-    print(dir)
     os.makedirs(dir, exist_ok=True)
     for x in ext[e]:
         os.rename(os.path.join(x[0],x[1]),os.path.join(dir,x[1]))
 ##Removing Empty Directories.
 for dpath, dnames, fnames in os.walk(os.path.join(os.path.expanduser("~"),"Desktop"),topdown=False):
     for dirs in dnames:
-        print(os.path.join(dpath,dirs))
         try:
             os.rmdir(os.path.join(dpath,dirs))
         except:
