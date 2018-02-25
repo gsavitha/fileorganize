@@ -6,7 +6,8 @@ ext={}
 byteconv=1024.0*1024
 #Uncomment the below line and comment the above line if you believe 1MB=1000B, you heathen.
 #byteconv=1000.0*1000.0
-if os
+if os.name=='nt':
+    path='C;'
 path=os.path.expanduser()
 for dpath, dnames, fnames in os.walk('/home/savitha/Desktop',topdown=False):
     for file in fnames:
